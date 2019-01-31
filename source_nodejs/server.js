@@ -16,7 +16,7 @@ const server = net.createServer((socket) => {
       console.log(err);
     }).then(() => {
         console.log("SENDING RESPONSE...");
-      socket.write("Server response.");
+      socket.write("This is the Server response.");
     });
   }).on('end', () => {
     console.log("CONNECTION ENDED");
