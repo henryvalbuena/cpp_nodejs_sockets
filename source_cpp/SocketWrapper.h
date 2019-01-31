@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstring>
 #include "../source_c/client.h"
+
 namespace sict {
 
     class SocketWrapper {
