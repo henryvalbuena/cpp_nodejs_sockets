@@ -15,15 +15,14 @@ namespace sict {
     public:
         SocketWrapper() {};
         // initialize with hostname and portno
-        SocketWrapper(const char*, const char*);
+        SocketWrapper(const char* hostname_, const char* portno_);
         ~SocketWrapper();
         // Start connection, send hostname and port no as
-        //
         // parameters, return true if successful
         bool connect() const;
         // Send a string to the server
         // returns true if successful
-        bool sendMsg(const char*) const;
+        bool sendMsg(const char* message_) const;
         // returns a reference from the response sent by
         // the server
         char* readResponse() const;

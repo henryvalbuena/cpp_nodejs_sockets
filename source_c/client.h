@@ -14,10 +14,9 @@ extern "C" {
 #include <unistd.h>
 
 #define MAX_BUFFER 256
-    void getArgs(char*[], int);
-    int init(const char*, const char*);
+    int init(const char* hostname_, const char* portno_);
     int openConnection();
-    int sendMessage(const char*);
+    int sendMessage(const char* message_);
     int receiveMessage();
     char* getMessage();
     int closeConnection();
