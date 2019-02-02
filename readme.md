@@ -28,3 +28,8 @@ JSON Class
 - Connectivity between client-server using sockets
 - Desktop console app to test Connectivity
 - Basic string data transmission
+
+# Issues
+- Check connectivity against remote servers
+    - Local server nodejs (same LAN)
+    - Remote server nodejs (Internet)

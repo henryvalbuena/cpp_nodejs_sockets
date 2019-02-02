@@ -4,7 +4,8 @@ const app           =   express();
 const net           =   require('net');
 
 app.get('/', (req, res) => {
-    res.send("Server: Hello...");
+    res.write("Server: Hello...");
+    res.write(HTTP_PORT).end();
 });
 
 const server = net.createServer((socket) => {

@@ -8,12 +8,12 @@
 namespace sict {
 
     class SocketWrapper {
-        char* hostname = nullptr;
-        char* portno = nullptr;
-        bool isEmpty = true;
+        char* hostname;
+        char* portno;
+        bool isEmpty;
         bool chkStr(const char*) const;
     public:
-        SocketWrapper() {};
+        SocketWrapper() : hostname(nullptr), portno(nullptr), isEmpty(true) {};
         // initialize with hostname and portno
         SocketWrapper(const char* hostname_, const char* portno_);
         ~SocketWrapper();
@@ -29,7 +29,9 @@ namespace sict {
         // close connection with the server
         // returns true if successful
         bool disconnect() const;
+        // return cstring hostname
         const char* gethostname() const;
+        // return cstring port no
         const char* getPortNo() const;
     };
 }

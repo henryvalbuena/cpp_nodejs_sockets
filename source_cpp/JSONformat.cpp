@@ -45,7 +45,8 @@ namespace sict {
     }
 
     int JSONformat::removePropertyAndValue(size_t pos) {
-        std::cout << "TO BE IMPLEMENTED\n"; 
+        std::cout << "TO BE IMPLEMENTED\n";
+        return 0;
     }
 
     void JSONformat::display() const {
