@@ -1,35 +1,38 @@
 
 # Purpose
-(In Review - to expand) Desktop app to send/receive JSON data from the web, using an intermediary
-web server for TCP socket communication.
-First use, request and receive stock market information
+Desktop app to send/receive JSON data between Node.js (Server) and
+C/C++ desktop app (Client), using socket programming communication.
 
 # Technologies
-Languages: C/C++, JavaScript, Node.js, Express.js
+Server: JavaScript, Node.js
+Client: C/C++
+TCP Socket data stream
 
 # To do list
+- SSL
+- Authentication
+
 SocketWrapper
 - Send JSON format requests
 - Receive JSON format responses
 - Send HTTP requests
 - Receive HTTP requests
-- Windows portability (maybe)
 
-ConsoleApp
-- Display data received with a particular format
+Console App
+- Display formated characters
 - Request for specific data
+- Add error handling methods (partially done)
 
 JSON Class
-- Add error handling methods
-- Review string, cstring copy performance
-- Reverse engineer JSON obj
+- Review string, cstring copy/move performance
+- Reverse engineer JSON obj received
+
+Server Node.js
+- Data parsing
+- Data Base
+- Remote server nodejs (public IP)
 
 # Done list
 - Connectivity between client-server using sockets
-- Desktop console app to test Connectivity
+- Convert strings into JSON format
 - Basic string data transmission
-
-# Issues
-- Check connectivity against remote servers
-    - Local server nodejs (same LAN)
-    - Remote server nodejs (Internet)

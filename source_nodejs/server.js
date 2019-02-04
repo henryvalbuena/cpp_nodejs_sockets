@@ -1,12 +1,6 @@
-const HTTP_PORT     =   process.env.PORT || 8080;
-const express       =   require('express');
-const app           =   express();
+const TCP_HOST      =   process.env.HOST || 'localhost';
+const TCP_PORT      =   process.env.PORT || 1337;
 const net           =   require('net');
-
-app.get('/', (req, res) => {
-    res.write("Server: Hello...");
-    res.write(HTTP_PORT).end();
-});
 
 const server = net.createServer((socket) => {
   console.log("CONNECTION RECEIVED");
@@ -38,10 +32,7 @@ function parseBody(chunk) {
   });
 }
 
-app.listen(HTTP_PORT, () => {
-    console.log("HTTP Server listening on: " + HTTP_PORT);
-});
-
-server.listen(1337, () => {
+server.listen(TCP_PORT, TCP_HOST, () => {
+  console.log("Make sure to set IP and PORT for the server");
   console.log("TCP Server listening on: ", server.address());
 });
