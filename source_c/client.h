@@ -16,6 +16,9 @@ extern "C" {
 
 #define MAX_BUFFER 256
 // ERROR MACROS
+// Object has no initialization
+#define EMPTY 0
+//
 #define OK 1
 // Hostname invalid
 #define HOST_NULL -1
@@ -29,6 +32,8 @@ extern "C" {
 #define RECV_ERR -5
 // Error trying to close the TCP connection
 #define CLOSE_ERR -6
+// The connection has not been initiated
+#define NOT_CONN -7
 
     // Initialize socket descriptor with server address and port number
     // Returns HOST_NULL if invalid hostname or _SOCK_ERR if fails to create socket

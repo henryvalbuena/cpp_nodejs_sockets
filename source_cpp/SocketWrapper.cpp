@@ -1,18 +1,21 @@
 #include "SocketWrapper.h"
 
 namespace sict {
-    SocketWrapper::SocketWrapper(const char* nm, const char* port) {
+    SocketWrapper::SocketWrapper(const char* nm, const char* port) : ColorMsg() {
         if (chkStr(nm) && chkStr(port)) {
             hostname = new char[std::strlen(nm)];
             strcpy(hostname, nm);
             portno = new char[std::strlen(port)];
             strcpy(portno, port);
-            hasInit = false;
-        } else {
             hasInit = true;
+            _err = OK;
+        } else {
+            hasInit = false;
             hostname = nullptr;
             portno = nullptr;
+            _err = EMPTY;
         }
+        isConnected = false;
     }
     SocketWrapper::~SocketWrapper() {
         delete [] hostname;
@@ -21,33 +24,46 @@ namespace sict {
         portno = nullptr;
     }
     bool SocketWrapper::connect() {
-        _err = init(hostname, portno);
-        if (_err > 0) {
-            _err = openConnection();
-            if (_err > 0) return true;
-            else displayErr(_err);
-        } 
-        else displayErr(_err);
+        if (hasInit) {
+            _err = init(hostname, portno);
+            if (_err > 0) {
+                _err = openConnection();
+                if (_err > 0) {
+                    isConnected = true;
+                    return true;
+                } else displayErr(_err);
+            } else displayErr(_err);
+        } else 
+            displayErr(EMPTY);
         return false;
     }
     bool SocketWrapper::sendMsg(const char* msg) {
-        clearBuffer();
-        _err = sendMessage(msg);
-        if (_err > 0) return true;
-        else displayErr(_err);
+        if (isConnected) {
+            clearBuffer();
+            _err = sendMessage(msg);
+            if (_err > 0) return true;
+            else displayErr(_err);
+        } else 
+            displayErr(NOT_CONN);
         return false;
     }
     char* SocketWrapper::readResponse() {
-        clearBuffer();
-        _err = receiveMessage();
-        if (_err > 0) return getMessage();
-        else displayErr(_err);
+        if (isConnected) {
+            clearBuffer();
+            _err = receiveMessage();
+            if (_err > 0) return getMessage();
+            else displayErr(_err);
+        } else 
+            displayErr(NOT_CONN);
         return nullptr;
     }
     bool SocketWrapper::disconnect() {
-        _err = closeConnection();
-        if (_err > 0) return true;
-        else displayErr(_err);
+        if (isConnected) {
+            _err = closeConnection();
+            if (_err > 0) return true;
+            else displayErr(_err);
+        } else 
+            displayErr(NOT_CONN);
         return false;
     }
     const char* SocketWrapper::gethostname() const {
@@ -61,26 +77,32 @@ namespace sict {
             return false;
         return true;
     }
-    void SocketWrapper::displayErr(int err) const {
+    void SocketWrapper::displayErr(int err) {
         switch (err)
         {
+            case EMPTY:
+                std::cout << ColorMsg::Red("ERROR:") << " Object has no initialization.\n";
+                break;
             case HOST_NULL:
-                std::cout << "ERROR: Could get hostname.\n";
+                std::cout << ColorMsg::Red("ERROR:") << " Could not get hostname.\n";
                 break;
             case SOCK_ERR:
-                std::cout << "ERROR: Could not create Socket File Descriptor.\n";
+                std::cout << ColorMsg::Red("ERROR:") << " Could not create Socket File Descriptor.\n";
+                break;
+            case NOT_CONN:
+                std::cout << ColorMsg::Red("ERROR:") << " The connection has not been initiated.\n";
                 break;
             case CONN_ERR:
-                std::cout << "ERROR: Failed to connect with the server.\n";
+                std::cout << ColorMsg::Red("ERROR:") << " Failed to connect with the server.\n";
                 break;
             case WRITE_ERR:
-                std::cout << "ERROR: Could not send message.\n";
+                std::cout << ColorMsg::Red("ERROR:") << " Could not send message.\n";
                 break;
             case RECV_ERR:
-                std::cout << "ERROR: Could not receive message.\n";
+                std::cout << ColorMsg::Red("ERROR:") << " Could not receive message.\n";
                 break;
             case CLOSE_ERR:
-                std::cout << "ERROR: Could not close connection.\n";
+                std::cout << ColorMsg::Red("ERROR:") << " Could not close connection.\n";
                 break;
         }
     }

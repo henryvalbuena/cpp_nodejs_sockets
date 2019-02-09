@@ -1,38 +1,30 @@
 
-# Purpose
+# C++Node Sockets 
 Desktop app to send/receive JSON data between Node.js (Server) and
 C/C++ desktop app (Client), using socket programming communication.
 
-# Technologies
+[![License](https://img.shields.io/badge/license-MIT-greed.svg)](https://github.com/roycloud/cpp_nodejs_sockets/blob/master/LICENSE.md) [![Progress](https://img.shields.io/badge/progress-30%25-blue.svg)](https://github.com/roycloud/cpp_nodejs_sockets/projects)
+
+## Technologies
 Server: JavaScript, Node.js
 Client: C/C++
-TCP Socket data stream
+TCP Socket data streams
 
-# To do list
-- SSL
-- Authentication
+## What does it do?
 
-SocketWrapper
-- Send JSON format requests
-- Receive JSON format responses
-- Send HTTP requests
-- Receive HTTP requests
+The general idea is to have a desktop app that communicates with a remote server and request specific data either from a database or the internet.
 
-Console App
-- Display formated characters
-- Request for specific data
-- Add error handling methods (partially done)
+## Why I did this?
 
-JSON Class
-- Review string, cstring copy/move performance
-- Reverse engineer JSON obj received
+To explore the whole process of data communications and software development combined together.
 
-Server Node.js
-- Data parsing
-- Data Base
-- Remote server nodejs (public IP)
+## Is this helpful in someway?
 
-# Done list
-- Connectivity between client-server using sockets
-- Convert strings into JSON format
-- Basic string data transmission
+If you're not interested in creating a C/C++ application without any 3rd party library as well as a nodejs server using only built in methods just for your own enjoyment and excitement of learning, then is not.
+
+## How it works?
+
+Underdevelopment...
+
+## Social
+[@H3nryJVM](https://twitter.com/h3nryjvm)

@@ -4,10 +4,11 @@
 #include <iostream>
 #include <cstring>
 #include "../source_c/client.h"
+#include "ColorMsg.h"
 
 namespace sict {
 
-    class SocketWrapper {
+    class SocketWrapper : public ColorMsg {
         // Holds the error type
         int _err;
         // Server address
@@ -16,12 +17,17 @@ namespace sict {
         char* portno;
         // If true the object has been created else is not
         bool hasInit;
+        // Tracks connection status
+        bool isConnected;
+        // cstring validator
         bool chkStr(const char*) const;
         // Error message handling
-        void displayErr(int _err) const;
+        void displayErr(int _err);
+        // ColorMsg color;
     public:
-        SocketWrapper() : hostname(nullptr), portno(nullptr), hasInit(true), _err(0) {};
-        // initialize with hostname and portno
+        SocketWrapper() : hostname(nullptr), portno(nullptr), hasInit(true), isConnected(false),
+        _err(0), ColorMsg() {};
+        // Initialize with hostname and portno
         SocketWrapper(const char* hostname_, const char* portno_);
         ~SocketWrapper();
         // Start connection, send hostname and port no as
@@ -30,14 +36,14 @@ namespace sict {
         // Send a string to the server
         // returns true if successful
         bool sendMsg(const char* message_);
-        // returns a reference from the response sent by the server
+        // Returns a reference from the response sent by the server
         char* readResponse();
-        // close connection with the server
+        // Close connection with the server
         // returns true if successful
         bool disconnect();
-        // return cstring hostname
+        // Return cstring hostname
         const char* gethostname() const;
-        // return cstring port no
+        // Return cstring port no
         const char* getPortNo() const;
     };
 }

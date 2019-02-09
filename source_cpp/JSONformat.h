@@ -20,23 +20,22 @@ namespace sict {
         size_t size;
         // JSON return cstring
         char* JSON;
-        // validate a c string passed if empty or null
+        // Validate a c string passed if empty or null
         bool strVal(const char* cstring_);
     public:
         JSONformat() : property(nullptr), value(nullptr), size(0), JSON(nullptr) {};
-    // destructor
         ~JSONformat();
-    // add property and value, return 1 if ok else fails
+    // Add property and value, return 1 if ok else fails
         int addPropertyAndValue(const char* property_, const char* value_);
-    // modify property, suppling property position in the array, return 1 if ok else fails
+    // Modify property, suppling property position in the array, return 1 if ok else fails
         int updateProperty(const char* property_, size_t position_);
-    // modify value, supplying property position in the array, return 1 if ok else fails
+    // Modify value, supplying property position in the array, return 1 if ok else fails
         int updateValue(const char* value_, size_t position_);
-    // remove property and value, supplying position in the array, return 1 if ok else fails
+    // Remove property and value, supplying position in the array, return 1 if ok else fails
         int removePropertyAndValue(size_t position_);
-    // display JSON obj
+    // Display current JSON object
         void display() const;
-    // returns c current string reference JSON format
+    // Returns cstring reference of JSON format
         char*& getJSONString();
     };
 }

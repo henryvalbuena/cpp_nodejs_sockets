@@ -40,16 +40,16 @@ int sendMessage(const char* msg) {
     memmove(buffer, msg, MAX_BUFFER);
     // writes the message to the socket and sends it
     // write fn takes the socket file descriptor, the char array and size of it
-    return write(sockfd,buffer,strlen(buffer)) < 0 ? WRITE_ERR : OK;
+    return send(sockfd, buffer, strlen(buffer), 0) < 0 ? WRITE_ERR : OK;
 }
 
 int receiveMessage() {
     // reads the socket for any response
-    return read(sockfd,buffer,255) < 0 ? RECV_ERR : OK;
+    return recv(sockfd, buffer, MAX_BUFFER, 0) < 0 ? RECV_ERR : OK;
 }
 
 void clearBuffer() {
-    memset(buffer, 0, 256);
+    memset(buffer, 0, MAX_BUFFER);
 }
 
 char* getMessage() {
