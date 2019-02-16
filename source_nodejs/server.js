@@ -2,16 +2,23 @@ const TCP_HOST      =   process.env.HOST || 'localhost';
 const TCP_PORT      =   process.env.PORT || 1337;
 const net           =   require('net');
 
+var pkg;
+var jsn = { name: "Roy"};
+
 const server = net.createServer((socket) => {
   console.log("CONNECTION RECEIVED");
   socket.on('data', data => {
     parseBody(data).then(body => {
       console.log(body);
+      pkg = JSON.parse(body);
     }, err => {
       console.log(err);
-    }).then(() => {
-        console.log("SENDING RESPONSE...");
-      socket.write("This is the Server response.");
+    }).then(data => {
+        console.log("SENDING RESPONSE..." + pkg);
+        if (pkg.id == 12)
+          socket.write(JSON.stringify(jsn));
+        else
+        socket.write(JSON.stringify({msg:"Wrong ID"}));
     });
   }).on('end', () => {
     console.log("CONNECTION ENDED");
