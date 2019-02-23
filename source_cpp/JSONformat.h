@@ -11,10 +11,6 @@
 #include <cstring>
 #include <iostream>
 
-// Error codes
-#define OK 1
-#define JSON_FORMAT -1
-#define OUT_OB -2
 namespace sict {
     class JSONformat {
         // Property of the JSON obj
@@ -31,11 +27,9 @@ namespace sict {
         bool isEmpty;
         // Validate a c string passed if empty or null
         bool strVal(const char* cstring_);
-        // Holds the error code
-        int err;
     public:
         JSONformat() : property(nullptr), value(nullptr), size(0), 
-            max(0), JSON(nullptr), isEmpty(true) {};
+            max(0), JSON(nullptr), isEmpty(true) {}
         // Construct a JSON object passing a string as argument that
         // have the format {"property":"value"[,"property":"value"]}
         JSONformat(const std::string JSON_String);
@@ -59,8 +53,6 @@ namespace sict {
         const char* getJSONString();
         // Returns true if current object is empty
         bool empty() const;
-        // Returns the current object error state
-        int errorState() const;
     };
 }
 #endif // SICT_JSONformat

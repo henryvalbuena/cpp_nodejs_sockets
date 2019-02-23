@@ -8,7 +8,7 @@
 
 namespace sict {
 
-    class SocketWrapper : public ColorMsg {
+    class SocketWrapper {
         // Holds the error type
         int _err;
         // Server address
@@ -23,10 +23,11 @@ namespace sict {
         bool chkStr(const char*) const;
         // Error message handling
         void displayErr(int _err);
-        // ColorMsg color;
+        // Instance of Color Code module
+        ColorMsg color;
     public:
         SocketWrapper() : hostname(nullptr), portno(nullptr), hasInit(true), isConnected(false),
-        _err(0), ColorMsg() {};
+        _err(0), color() {};
         // Initialize with hostname and portno
         SocketWrapper(const char* hostname_, const char* portno_);
         ~SocketWrapper();

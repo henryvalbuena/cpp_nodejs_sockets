@@ -1,7 +1,7 @@
 #include "SocketWrapper.h"
 
 namespace sict {
-    SocketWrapper::SocketWrapper(const char* nm, const char* port) : ColorMsg() {
+    SocketWrapper::SocketWrapper(const char* nm, const char* port) : color() {
         if (chkStr(nm) && chkStr(port)) {
             hostname = new char[std::strlen(nm)];
             strcpy(hostname, nm);
@@ -78,31 +78,30 @@ namespace sict {
         return true;
     }
     void SocketWrapper::displayErr(int err) {
-        switch (err)
-        {
+        switch (err) {
             case EMPTY:
-                std::cout << ColorMsg::Red("ERROR:") << " Object has no initialization.\n";
+                std::cout << color.Red("ERROR:") << " Object has no initialization.\n";
                 break;
             case HOST_NULL:
-                std::cout << ColorMsg::Red("ERROR:") << " Could not get hostname.\n";
+                std::cout << color.Red("ERROR:") << " Could not get hostname.\n";
                 break;
             case SOCK_ERR:
-                std::cout << ColorMsg::Red("ERROR:") << " Could not create Socket File Descriptor.\n";
+                std::cout << color.Red("ERROR:") << " Could not create Socket File Descriptor.\n";
                 break;
             case NOT_CONN:
-                std::cout << ColorMsg::Red("ERROR:") << " The connection has not been initiated.\n";
+                std::cout << color.Red("ERROR:") << " The connection has not been initiated.\n";
                 break;
             case CONN_ERR:
-                std::cout << ColorMsg::Red("ERROR:") << " Failed to connect with the server.\n";
+                std::cout << color.Red("ERROR:") << " Failed to connect with the server.\n";
                 break;
             case WRITE_ERR:
-                std::cout << ColorMsg::Red("ERROR:") << " Could not send message.\n";
+                std::cout << color.Red("ERROR:") << " Could not send message.\n";
                 break;
             case RECV_ERR:
-                std::cout << ColorMsg::Red("ERROR:") << " Could not receive message.\n";
+                std::cout << color.Red("ERROR:") << " Could not receive message.\n";
                 break;
             case CLOSE_ERR:
-                std::cout << ColorMsg::Red("ERROR:") << " Could not close connection.\n";
+                std::cout << color.Red("ERROR:") << " Could not close connection.\n";
                 break;
         }
     }
